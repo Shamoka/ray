@@ -19,8 +19,8 @@ bool Sphere::intersect(const Ray &ray, float &dist)
   if (delta < 0.f)
     return false;
   float disc = sqrt(delta);
-  if ((dist = - (b + disc)) < 0.)
-    dist = - (b - disc);
+  if ((dist = b + disc) < 0.)
+    dist = b - disc;
   return true;
 }
 
