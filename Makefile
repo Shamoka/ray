@@ -11,8 +11,7 @@ SRC = sources/main.cpp			\
       sources/ray.cpp 			\
       sources/sphere.cpp		\
       sources/simpleScene.cpp		\
-      sources/rayTracer.cpp 		\
-      sources/light.cpp
+      sources/rayTracer.cpp
 
 
 OBJ = $(SRC:.cpp=.o)
