@@ -16,9 +16,9 @@ int main(int ac, char **av)
   RayTracer rayTracer(800, 600, 8., 6., 40., 10);
   SimpleScene scene = SimpleScene();
 
-  Sphere *s1 = new Sphere(Vec3f(0., 0., 80.), 2., Color(45, 168, 201));
-  Sphere *s2 = new Sphere(Vec3f(2., 1., 60.), 2., Color(17, 123, 50));
-  Sphere *s3 = new Sphere(Vec3f(-2., -1., 60.), 2., Color(201, 123, 150));
+  Sphere *s1 = new Sphere(Vec3f(0., 0., 60.), 2., Color(45, 168, 201));
+  Sphere *s2 = new Sphere(Vec3f(1.5, 3., 60.), 1., Color(210, 40, 50));
+  Sphere *s3 = new Sphere(Vec3f(-1.5, -3., 60.), 1., Color(120, 12, 128));
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);

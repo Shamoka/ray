@@ -26,21 +26,15 @@ void Vec3f::setX(float f) { this->m_x = f; }
 void Vec3f::setY(float f) { this->m_y = f; }
 void Vec3f::setZ(float f) { this->m_z = f; }
 
-float Vec3f::length_sq() const
-{
-  return this->m_x * this->m_x + this->m_y * this->m_y + this->m_z + this->m_z;
-}
-
 Vec3f &Vec3f::normalize()
 {
-  float nor_sq = this->length_sq();
+  float norm = this->norm();
 
-  if (nor_sq > 0)
+  if (norm != 0)
   {
-    float invNor = 1 / sqrt(nor_sq);
-    this->m_x *= invNor;
-    this->m_y *= invNor;
-    this->m_z *= invNor;
+    m_x /= norm;
+    m_y /= norm;
+    m_z /= norm;
   }
   return *this;
 }

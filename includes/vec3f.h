@@ -22,7 +22,6 @@ class   Vec3f
     void setY(float f);
     void setZ(float f);
 
-    float length_sq() const;
     Vec3f &normalize();
     float norm() const;
     float norm2() const;

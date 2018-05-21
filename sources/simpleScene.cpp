@@ -42,7 +42,7 @@ long SimpleScene::getFirstCollision(const Ray &ray, float &dist)
   {
     float currentDist;
 
-    if ((*it)->intersect(ray, currentDist) && currentDist > 0.01f && currentDist < min_dist)
+    if ((*it)->intersect(ray, currentDist) && currentDist > 0.1f && currentDist < min_dist)
     {
       min_primitive = it - this->m_primitives.begin();
       min_dist = currentDist;
