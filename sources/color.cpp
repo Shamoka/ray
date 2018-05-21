@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "color.h"
 
 Color::Color(float r, float g, float b) :
@@ -29,8 +31,8 @@ Color Color::operator*(const Color &c) const
 
 Color Color::operator+=(const Color &c)
 {
-  m_r += c.r();
-  m_g += c.g();
-  m_b += c.b();
+  m_r = fmin(m_r + c.r(), 255);
+  m_g = fmin(m_g + c.g(), 255);
+  m_b = fmin(m_b + c.b(), 255);
   return *this;
 }

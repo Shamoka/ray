@@ -61,7 +61,7 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level) c
 
   Primitive *primitive = m_scene->getPrimitive(index);
   primitive->computeColorNormal(ray, dist, mp);
-  color = mp.color;
+  color = m_scene->computeColor(ray.origin() + ray.direction() * dist, mp);
 
   if (level < m_levels)
   {

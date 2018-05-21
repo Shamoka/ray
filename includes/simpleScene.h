@@ -5,11 +5,13 @@
 
 #include "primitive.h"
 #include "ray.h"
+#include "light.h"
 
 class   SimpleScene
 {
   private:
-    std::vector<Primitive*>      m_primitives;
+    std::vector<Primitive*>     m_primitives;
+    std::vector<Light*>         m_lights;
 
   public:
     SimpleScene();
@@ -19,6 +21,9 @@ class   SimpleScene
     Primitive   *removePrimitive(unsigned long index);
     long        getFirstCollision(const Ray &ray, float &dist);
     bool        addPrimitive(Primitive *primitive);
+    bool        addLight(Light *light);
+    bool        testCollision(const Ray &ray, float dist);
+    const Color computeColor(const Vec3f &center, const MaterialPoint &mp);
 };
 
 #endif

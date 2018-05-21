@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "simpleScene.h"
+#include "light.h"
 
 SimpleScene::SimpleScene() :
   m_primitives()
@@ -62,4 +63,48 @@ bool SimpleScene::addPrimitive(Primitive *primitive)
     return false;
   this->m_primitives.push_back(primitive);
   return true;
+}
+
+bool SimpleScene::addLight(Light *l)
+{
+  if (std::find(this->m_lights.begin(), this->m_lights.end(), l) != this->m_lights.end())
+    return false;
+  this->m_lights.push_back(l);
+  return true;
+
+}
+
+const Color SimpleScene::computeColor(const Vec3f &center, const MaterialPoint &mp)
+{
+  Color         t_color(0, 0, 0);
+
+  for (std::vector<Light*>::const_iterator it = m_lights.begin();
+      it != m_lights.end(); ++it)
+  {
+    Vec3f       path = (*it)->center() - center;
+    float       pathSize = path.norm();
+    path.normalize();
+    Ray         ray(center, path);
+
+    if (testCollision(ray, pathSize))
+      continue;
+
+    float cosphi = path.dot(mp.normal);
+    if (cosphi < 0)
+      continue;
+    t_color += mp.color * cosphi;
+  }
+  return t_color;
+}
+
+bool SimpleScene::testCollision(const Ray &ray, float dist)
+{
+  for (std::vector<Primitive*>::const_iterator it = m_primitives.begin();
+      it != m_primitives.end(); ++it)
+  {
+    float t_dist;
+    if ((*it)->intersect(ray, t_dist) && t_dist > 0.01f && t_dist < dist)
+      return true;
+  }
+  return false;
 }

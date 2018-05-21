@@ -24,6 +24,10 @@ int main(int ac, char **av)
   scene.addPrimitive(s2);
   scene.addPrimitive(s3);
 
+  Light *l1 = new Light(Vec3f(3., 3., 50), Color(10, 10, 10));
+
+  scene.addLight(l1);
+
   rayTracer.setScene(&scene);
 
   rayTracer.draw(colorMap);
