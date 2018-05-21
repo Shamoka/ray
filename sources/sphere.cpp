@@ -19,7 +19,7 @@ bool Sphere::intersect(const Ray &ray, float &dist)
   if (delta < 0.f)
     return false;
   float disc = sqrt(delta);
-  if ((dist = b + disc) < 0.)
+  if ((dist = b + disc) > 0.)
     dist = b - disc;
   return true;
 }
@@ -29,7 +29,7 @@ void Sphere::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
   Vec3f         collide(ray.origin() + ray.direction() * dist);
 
   mp.normal = collide - m_center;
-  mp.normal *= 1.f / mp.normal.norm();
+  mp.normal.normalize();
   mp.color = m_color;
   mp.reflect = Color(0.1, 0.1, 0.1);
 }
