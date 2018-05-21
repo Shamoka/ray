@@ -17,14 +17,6 @@ float Color::g() const { return this->m_g; }
 
 float Color::b() const { return this->m_b; }
 
-Color &Color::operator=(const Color &rhs)
-{
-  m_r = rhs.r();
-  m_g = rhs.g();
-  m_b = rhs.b();
-  return *this;
-}
-
 Color Color::operator*(const float &f) const
 {
   return Color(m_r * f, m_g * f, m_b * f);

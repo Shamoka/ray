@@ -22,7 +22,6 @@ class           Color
     Color operator*(const float &f) const;
     Color operator*(const Color &c) const;
     Color operator+=(const Color &c);
-    Color &operator=(const Color &rhs);
 };
 
 #endif
