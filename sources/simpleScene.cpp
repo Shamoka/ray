@@ -71,7 +71,6 @@ bool SimpleScene::addLight(Light *l)
     return false;
   this->m_lights.push_back(l);
   return true;
-
 }
 
 const Color SimpleScene::computeColor(const Vec3f &center, const MaterialPoint &mp)
@@ -90,7 +89,7 @@ const Color SimpleScene::computeColor(const Vec3f &center, const MaterialPoint &
       continue;
 
     float cosphi = path * mp.normal;
-    if (cosphi < 0)
+    if (cosphi < 0.01f)
       cosphi = - cosphi;
     t_color += mp.color * cosphi * (*it)->computeColor(ray, pathSize);
   }
