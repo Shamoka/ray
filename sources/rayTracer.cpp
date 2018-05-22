@@ -66,7 +66,7 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level) c
   if (level < m_levels)
   {
     Ray ray_sec(ray.origin() + ray.direction() * dist,
-        ray.direction() - mp.normal * 2 * (ray.direction().dot(mp.normal)));
+        ray.direction() - mp.normal * 2 * (ray.direction() * mp.normal));
     ray_sec.direction() *= 1. / ray_sec.direction().norm();
     Color color_sec(0, 0, 0);
     computeColor(ray_sec, color_sec, level + 1);

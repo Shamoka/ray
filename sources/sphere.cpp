@@ -12,7 +12,7 @@ Sphere::~Sphere()
 bool Sphere::intersect(const Ray &ray, float &dist)
 {
   Vec3f vector = ray.origin() - m_center;
-  float b = -(ray.direction().dot(vector));
+  float b = -(ray.direction() * vector);
   float c = vector.norm2() - m_radius * m_radius;
   float delta = (b * b - c);
 

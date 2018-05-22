@@ -9,8 +9,8 @@ Plane::~Plane()
 
 bool Plane::intersect(const Ray &ray, float &dist)
 {
-  float a = (m_point - ray.origin() + ray.direction()).dot(m_normal);
-  float b = ray.direction().dot(m_normal);
+  float a = (m_point - ray.origin() + ray.direction()) * m_normal;
+  float b = ray.direction() * m_normal;
 
   if (b < 0.001f)
   {
