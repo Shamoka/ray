@@ -43,7 +43,7 @@ long SimpleScene::getFirstCollision(const Ray &ray, float &dist)
   {
     float currentDist;
 
-    if ((*it)->intersect(ray, currentDist) && currentDist > 0.1f && currentDist < min_dist)
+    if ((*it)->intersect(ray, currentDist) && currentDist > 0.01f && currentDist < min_dist)
     {
       min_primitive = it - this->m_primitives.begin();
       min_dist = currentDist;
@@ -91,8 +91,8 @@ const Color SimpleScene::computeColor(const Vec3f &center, const MaterialPoint &
 
     float cosphi = path.dot(mp.normal);
     if (cosphi < 0)
-      continue;
-    t_color += mp.color * cosphi;
+      cosphi = - cosphi;
+    t_color += mp.color * cosphi * (*it)->computeColor(ray, pathSize);
   }
   return t_color;
 }

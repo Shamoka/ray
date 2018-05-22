@@ -10,6 +10,7 @@ SRC = sources/main.cpp			\
       sources/primitive.cpp 		\
       sources/ray.cpp 			\
       sources/sphere.cpp		\
+      sources/plane.cpp 		\
       sources/simpleScene.cpp		\
       sources/rayTracer.cpp		\
       sources/light.cpp
