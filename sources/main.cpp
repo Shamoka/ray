@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <chrono>
+#include <thread>
 
 #include "color.h"
 #include "rayTracer.h"
@@ -20,7 +22,7 @@ int main(int ac, char **av)
   Sphere *s1 = new Sphere(Vec3f(0, 0, 60), 2., Color(45, 168, 201), Color(0.1, 0.1, 0.1));
   Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), Color(0.1, 0.1, 0.1));
   Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), Color(0.1, 0.1, 0.1));
-  Plane  *p1 = new Plane(Vec3f(1, 1, 1), Vec3f(0, 10, 60), Color(154, 38, 123), Color(0.1, 0.1, 0.1));
+  Plane  *p1 = new Plane(Vec3f(1, 4, 1), Vec3f(0, 10, 60), Color(154, 38, 123), Color(0.1, 0.1, 0.1));
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);
@@ -57,6 +59,7 @@ int main(int ac, char **av)
         window.close();
     }
     window.display();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
   }
   return 0;
 }
