@@ -89,7 +89,7 @@ const Color SimpleScene::computeColor(const Vec3f &center, const MaterialPoint &
       continue;
 
     float cosphi = path * mp.normal;
-    if (cosphi < 0.01f)
+    if (cosphi < 0)
       cosphi = - cosphi;
     t_color += mp.color * cosphi * (*it)->computeColor(ray, pathSize);
   }
