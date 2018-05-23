@@ -12,10 +12,10 @@ class Plane : public virtual Primitive
     Vec3f       m_normal;
     Vec3f       m_point;
     Color       m_color;
-    Color       m_reflect;
+    float       m_reflect;
 
   public:
-    Plane(const Vec3f &normal, const Vec3f &point, const Color &color, const Color &reflect);
+    Plane(const Vec3f &normal, const Vec3f &point, const Color &color, const float &reflect);
     ~Plane();
 
     bool intersect(const Ray &ray, float &dist);

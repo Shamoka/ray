@@ -1,6 +1,6 @@
 #include "plane.h"
 
-Plane::Plane(const Vec3f &normal, const Vec3f &point, const Color &color, const Color &reflect) :
+Plane::Plane(const Vec3f &normal, const Vec3f &point, const Color &color, const float &reflect) :
   m_normal(normal), m_point(point), m_color(color), m_reflect(reflect)
 {}
 

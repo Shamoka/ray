@@ -2,7 +2,7 @@
 
 #include "sphere.h"
 
-Sphere::Sphere(const Vec3f &center, float radius, const Color &color, const Color &reflect) :
+Sphere::Sphere(const Vec3f &center, float radius, const Color &color, const float &reflect) :
   m_center(center), m_radius(radius), m_color(color), m_reflect(reflect)
 {}
 
