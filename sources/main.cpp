@@ -30,8 +30,10 @@ int main(int ac, char **av)
   scene.addPrimitive(p1);
 
   Light *l1 = new Light(Vec3f(20, 0, 60), Color(255, 255, 255));
+  Light *l2 = new Light(Vec3f(-20, 0, 60), Color(255, 255, 255));
 
   scene.addLight(l1);
+  scene.addLight(l2);
 
   rayTracer.setScene(&scene);
 

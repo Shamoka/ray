@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 
 #include "sphere.h"
 
@@ -19,7 +19,7 @@ bool Sphere::intersect(const Ray &ray, float &dist)
   if (delta < 0.f)
     return false;
   float disc = sqrt(delta);
-  if ((dist = b - disc) < 0.)
+  if ((dist = b - disc) < 0.01)
     dist = b + disc;
   return true;
 }
