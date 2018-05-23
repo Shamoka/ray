@@ -21,12 +21,12 @@ float Color::b() const { return this->m_b; }
 
 Color Color::operator*(const float &f) const
 {
-  return Color(m_r * f, m_g * f, m_b * f);
+  return Color(fmin(m_r * f, 255), fmin(m_g * f, 255), fmin(m_b * f, 255));
 }
 
 Color Color::operator*(const Color &c) const
 {
-  return Color(m_r * c.r(), m_g * c.g(), m_b * c.b());
+  return Color(fmin(m_r * c.r(), 255), fmin(m_g * c.g(), 255), fmin(m_b * c.b(), 255));
 }
 
 Color Color::operator+=(const Color &c)
