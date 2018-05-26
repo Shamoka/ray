@@ -49,6 +49,13 @@ float Vec3f::norm2() const
   return m_x * m_x + m_y * m_y + m_z * m_z;
 }
 
+Vec3f Vec3f::vectorial(const Vec3f &v) const
+{
+  return Vec3f(m_y * v.z() - m_z * v.y(),
+      m_z * v.x() - m_x * v.z(),
+      m_x * v.y() - m_y * v.x());
+}
+
 Vec3f Vec3f::operator*(const float &f) const
 {
   return Vec3f(m_x * f, m_y * f, m_z * f);
