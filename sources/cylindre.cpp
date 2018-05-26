@@ -3,9 +3,10 @@
 
 #include "cylindre.h"
 
-Cylindre::Cylindre(const Vec3f &base, const float &height, const float &radius,
-    const Color &color, const float &reflect) :
+Cylindre::Cylindre(const Vec3f &base, const Vec3f &direction, const float &height,
+    const float &radius, const Color &color, const float &reflect) :
   m_base(base),
+  m_direction(direction),
   m_height(height),
   m_radius(radius),
   m_color(color),
