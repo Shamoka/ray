@@ -33,3 +33,4 @@ void Sphere::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
   mp.color = m_color;
   mp.reflect = m_reflect;
 }
+
