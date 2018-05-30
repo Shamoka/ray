@@ -23,8 +23,8 @@ int main(int ac, char **av)
   Sphere *s1 = new Sphere(Vec3f(0, 0, 60), 2., Color(45, 168, 201), 0);
   Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 0);
   Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 0);
-  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 75), Color(255, 255, 255), 0);
-  Cylindre *c1 = new Cylindre(Vec3f(4, 0, 50), Vec3f(1, 1, 1), 5, 1, Color(13, 123, 84), 0);
+  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 0);
+  Cylindre *c1 = new Cylindre(Vec3f(4, 0, 50), Vec3f(1, 1, 1), 5, 2, Color(13, 123, 84), 0);
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);
@@ -32,8 +32,8 @@ int main(int ac, char **av)
   scene.addPrimitive(p1);
   scene.addPrimitive(c1);
 
-  Light *l1 = new Light(Vec3f(20, 0, 60), Color(255, 255, 255));
-  Light *l2 = new Light(Vec3f(0, 0, 40), Color(255, 255, 255));
+  Light *l1 = new Light(Vec3f(15, 0, 40), Color(255, 255, 255));
+  Light *l2 = new Light(Vec3f(0, 4, 40), Color(255, 255, 255));
 
   scene.addLight(l1);
   scene.addLight(l2);

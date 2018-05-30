@@ -34,12 +34,12 @@ bool Cylindre::intersect(const Ray &ray, float &dist)
   dist = t2;
   float dist_max_sq = pow((ray.origin() + ray.direction() * dist - m_center).norm(), 2)
     - m_radius * m_radius;
-  if (sqrt(dist_max_sq) > m_height)
+  if (sqrt(dist_max_sq) > m_height / 2)
   {
     dist = t1;
     dist_max_sq = pow((ray.origin() + ray.direction() * dist - m_center).norm(), 2)
       - m_radius * m_radius;
-    if (sqrt(dist_max_sq) > m_height)
+    if (sqrt(dist_max_sq) > m_height / 2)
       return false;
   }
   return true;
