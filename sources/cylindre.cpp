@@ -18,17 +18,12 @@ Cylindre::~Cylindre()
 
 bool Cylindre::intersect(const Ray &ray, float &dist)
 {
-  float a = ray.direction().x() * ray.direction().x()
-    + ray.direction().y() * ray.direction().y();
-  float b = 2 * (ray.origin().x() * ray.direction().x()
-      - ray.direction().x() * m_base.x()
-      + ray.origin().y() * ray.direction().y()
-      - ray.direction().y() * m_base.y());
-  float c = ray.origin().y() * ray.origin().y()
-    + ray.origin().x() * ray.origin().x()
-    - 2 * ray.origin().x() * m_base.x()
-    - 2 * ray.origin().y() * m_base.y()
-    - m_radius * m_radius;
+  float a = ray.direction().vectorial(m_direction).norm2();
+  float b = (ray.origin() - m_base).vectorial(m_direction) 
+    * ray.direction().vectorial(m_direction) * 2;
+  float c = (ray.origin() - m_base).vectorial(m_direction)
+    * (ray.origin() - m_base).vectorial(m_direction)
+    - m_radius * m_radius * m_direction.norm2();
   float delta = b * b - 4 * a * c;
 
   if (delta < 0)
@@ -36,30 +31,26 @@ bool Cylindre::intersect(const Ray &ray, float &dist)
   float sqdelta = sqrt(delta);
   float t1 = (-b + sqdelta) / (2 * a);
   float t2 = (-b - sqdelta) / (2 * a);
-  float height1 = ray.origin().z() + t1 * ray.direction().z() - m_base.z();
-  float height2 = ray.origin().z() + t2 * ray.direction().z() - m_base.z();
-  float height;
-  if (height1 < 0)
+  dist = t2;
+  float dist_max_sq = pow((ray.origin() + ray.direction() * dist - m_base).norm(), 2)
+    - m_radius * m_radius;
+  if (sqrt(dist_max_sq) > m_height)
   {
-    height = height2;
-    dist = t2;
-  }
-  else
-  {
-    height = height1;
     dist = t1;
+    dist_max_sq = pow((ray.origin() + ray.direction() * dist - m_base).norm(), 2)
+      - m_radius * m_radius;
+    if (sqrt(dist_max_sq) > m_height)
+      return false;
   }
-  if (height > m_height || height < 0)
-    return false;
   return true;
 }
 
 void Cylindre::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
 {
   Vec3f intersect = ray.origin() + ray.direction() * dist;
-  Vec3f center_intersect = m_base;
-  center_intersect.setZ(m_base.z() + ray.origin().z() + ray.direction().z() * dist);
-  mp.normal = center_intersect - intersect;
+  Vec3f center_intersect = m_base + m_direction 
+    * (pow((ray.origin() + ray.direction() * dist - m_base).norm(), 2) - m_radius * m_radius);
+  mp.normal = intersect - center_intersect;
   mp.normal.normalize();
   mp.color = m_color;
   mp.reflect = m_reflect;

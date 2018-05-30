@@ -24,7 +24,7 @@ int main(int ac, char **av)
   Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 0);
   Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 0);
   Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 75), Color(255, 255, 255), 0);
-  Cylindre *c1 = new Cylindre(Vec3f(2, 0, 50), Vec3f(1, 1, 1), 40, 0.5, Color(13, 123, 84), 0);
+  Cylindre *c1 = new Cylindre(Vec3f(4, 0, 50), Vec3f(1, 1, 2), 5, 1, Color(13, 123, 84), 0);
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);
