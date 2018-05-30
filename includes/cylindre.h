@@ -9,7 +9,7 @@
 class Cylindre : public virtual Primitive
 {
   private:
-    Vec3f       m_base;
+    Vec3f       m_center;
     Vec3f       m_direction;
     float       m_height;
     float       m_radius;
@@ -17,7 +17,7 @@ class Cylindre : public virtual Primitive
     float       m_reflect;
 
   public:
-    Cylindre(const Vec3f &base, const Vec3f &direction, const float &height,
+    Cylindre(const Vec3f &center, const Vec3f &direction, const float &height,
         const float &radius, const Color &color, const float &reflect);
     ~Cylindre();
 
