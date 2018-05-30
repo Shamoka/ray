@@ -27,6 +27,7 @@ class   Vec3f
     float norm2() const;
     Vec3f vectorial(const Vec3f &v) const;
     Vec3f operator*(const float &f) const;
+    Vec3f operator/(const float &f) const;
     float operator*(const Vec3f &f) const;
     Vec3f operator+(const Vec3f &v) const;
     Vec3f operator-(const float &f) const;

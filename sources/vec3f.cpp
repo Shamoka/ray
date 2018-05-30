@@ -61,6 +61,11 @@ Vec3f Vec3f::operator*(const float &f) const
   return Vec3f(m_x * f, m_y * f, m_z * f);
 }
 
+Vec3f Vec3f::operator/(const float &f) const
+{
+  return Vec3f(m_x / f, m_y / f, m_z / f);
+}
+
 float Vec3f::operator*(const Vec3f &v) const
 {
   return m_x * v.x() + m_y * v.y() + m_z * v.z();
