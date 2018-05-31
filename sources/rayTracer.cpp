@@ -72,12 +72,16 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level, f
       getRefracted(refracted_dir, mp.normal, ray.direction(), refract, mp.refract);
       Ray refracted(ray.origin() + ray.direction() * dist, refracted_dir);
       float reflectance = computeReflectance(mp.normal, refracted.direction(), refract, mp.refract);
-      Color color_sec(0, 0, 0);
+      Color color_refracted(0, 0, 0);
       if (refract == mp.refract)
-        computeColor(refracted, color_sec, level + 1, 1.0f);
+        computeColor(refracted, color_refracted, level + 1, 1.0f);
       else
-        computeColor(refracted, color_sec, level + 1, mp.refract);
-      color = color_sec * (1.f - reflectance);
+        computeColor(refracted, color_refracted, level + 1, mp.refract);
+      Color color_reflected(0, 0, 0);
+      Ray reflected(ray.origin() + ray.direction() * dist,
+          getReflected(mp.normal, ray.direction()));
+      computeColor(reflected, color_reflected, level + 1, refract);
+      color = color_refracted.mean(color_reflected, (1.0 - reflectance), reflectance);
     }
     else
     {

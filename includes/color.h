@@ -22,6 +22,7 @@ class           Color
     Color operator*(const float &f) const;
     Color operator*(const Color &c) const;
     Color operator+=(const Color &c);
+    Color mean(const Color &c, float c1, float c2);
 };
 
 #endif

@@ -36,3 +36,10 @@ Color Color::operator+=(const Color &c)
   m_b = fmin(m_b + c.b(), 255);
   return *this;
 }
+
+Color Color::mean(const Color &c, float c1, float c2)
+{
+  return Color((m_r * c1 + c.r() * c2) / (c1 + c2),
+      (m_g * c1 + c.g() * c2) / (c1 + c2),
+      (m_b * c1 + c.b() * c2) / (c1 + c2));
+}
