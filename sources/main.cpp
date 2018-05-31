@@ -20,11 +20,11 @@ int main(int ac, char **av)
   RayTracer rayTracer(800, 600, 8., 6., 20., 10);
   SimpleScene scene = SimpleScene();
 
-  Sphere *s1 = new Sphere(Vec3f(0, 0, 60), 2., Color(45, 168, 201), 0);
-  Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 0);
-  Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 0);
-  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 0);
-  Cylindre *c1 = new Cylindre(Vec3f(4, 0, 50), Vec3f(1, 0, 1), 10, 1, Color(13, 123, 84), 0);
+  Sphere *s1 = new Sphere(Vec3f(0, 0, 60), 2., Color(45, 168, 201), 1);
+  Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 1);
+  Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 1);
+  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 1);
+  Cylindre *c1 = new Cylindre(Vec3f(4, 3.5, 70), Vec3f(1, 0, -1), 10, 1, Color(13, 123, 84), 1);
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);
