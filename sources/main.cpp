@@ -20,11 +20,11 @@ int main(int ac, char **av)
   RayTracer rayTracer(800, 600, 8., 6., 20., 10);
   SimpleScene scene = SimpleScene();
 
-  Sphere *s1 = new Sphere(Vec3f(0, 0, 60), 2., Color(45, 168, 201), 1);
-  Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 1);
-  Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 1);
-  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 1);
-  Cylindre *c1 = new Cylindre(Vec3f(4, 3.5, 70), Vec3f(1, 0, -1), 10, 1, Color(13, 123, 84), 1);
+  Sphere *s1 = new Sphere(Vec3f(0, 3, 40), 1., Color(0, 0, 0), 1.4f, true);
+  Sphere *s2 = new Sphere(Vec3f(1, 3, 60), 1., Color(210, 40, 50), 1, false);
+  Sphere *s3 = new Sphere(Vec3f(-1, 4, 60), 1., Color(120, 12, 128), 1, false);
+  Plane  *p1 = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 1, false);
+  Cylindre *c1 = new Cylindre(Vec3f(4, 3, 50), Vec3f(1, 0, -1), 5, 1, Color(29, 123, 122), 1.3, false);
 
   scene.addPrimitive(s1);
   scene.addPrimitive(s2);
@@ -33,7 +33,7 @@ int main(int ac, char **av)
   scene.addPrimitive(c1);
 
   Light *l1 = new Light(Vec3f(15, 0, 40), Color(255, 255, 255));
-  Light *l2 = new Light(Vec3f(0, 4, 40), Color(255, 255, 255));
+  Light *l2 = new Light(Vec3f(0, 4, 30), Color(255, 255, 255));
 
   scene.addLight(l1);
   scene.addLight(l2);

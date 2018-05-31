@@ -9,7 +9,7 @@ typedef struct  s_materialPoint
 {
   Vec3f         normal;
   Color         color;
-  float         reflect;
+  float         refract;
 }               MaterialPoint;
 
 class Primitive
@@ -21,6 +21,7 @@ class Primitive
     virtual bool intersect(const Ray &ray, float &dist) = 0;
     virtual void computeColorNormal(const Ray &ray, float dist, 
         MaterialPoint &caracteristics) = 0;
+    virtual bool transparent() const = 0;
 };
 
 #endif

@@ -1,4 +1,5 @@
-#include <math.h>
+#include <cmath>
+#include <iostream>
 
 #include "rayTracer.h"
 
@@ -31,7 +32,7 @@ void RayTracer::draw(Color *screen) const
     {
       generateRay(i, j, ray);
       Color color(0, 0, 0);
-      computeColor(ray, color, 0);
+      computeColor(ray, color, 0, 1.0f);
       screen[j * m_pixelWidth + i] = color;
     }
   }
@@ -49,7 +50,7 @@ void RayTracer::setViewer(float width, float height,
   updateParameters();
 }
 
-void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level) const
+void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level, float refract) const
 {
   float                 dist;
   long                  index;
@@ -65,12 +66,26 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level) c
 
   if (level < m_levels)
   {
-    Ray ray_sec(ray.origin() + ray.direction() * dist,
-        ray.direction() - mp.normal * 2 * (ray.direction() * mp.normal));
-    ray_sec.direction() *= 1. / ray_sec.direction().norm();
-    Color color_sec(0, 0, 0);
-    computeColor(ray_sec, color_sec, level + 1);
-    color += color_sec * mp.reflect;
+    if (primitive->transparent())
+    {
+      Vec3f refracted_dir;
+      getRefracted(refracted_dir, mp.normal, ray.direction(), refract, mp.refract);
+      Ray refracted(ray.origin() + ray.direction() * dist, refracted_dir);
+      Color color_sec(0, 0, 0);
+      if (refract == mp.refract)
+        computeColor(refracted, color_sec, level + 1, 1.0f);
+      else
+        computeColor(refracted, color_sec, level + 1, mp.refract);
+      color = color_sec;
+    }
+    else
+    {
+      Ray reflected(ray.origin() + ray.direction() * dist,
+          getReflected(mp.normal, ray.direction()));
+      Color color_sec(0, 0, 0);
+      computeColor(reflected, color_sec, level + 1, refract);
+      color += color_sec;
+    }
   }
 }
 
@@ -78,4 +93,37 @@ void RayTracer::updateParameters()
 {
   m_precompWidth = m_width / m_pixelWidth;
   m_precompHeight = m_height / m_pixelHeight;
+}
+
+Vec3f RayTracer::getReflected(const Vec3f &normal, const Vec3f &ray) const
+{
+  float cosI = - (normal * ray);
+  return ray + normal * 2 * cosI;
+}
+
+bool RayTracer::getRefracted(Vec3f &refracted, const Vec3f &normal, 
+    const Vec3f &ray, float n1, float n2) const
+{
+  float n = n1 / n2;
+  float cosI = fabs(normal * ray);
+  float sinT2 = n * n * (1.0 - cosI * cosI);
+  if (sinT2 > 1.0)
+    return false;
+  float cosT = sqrt(1.0 - sinT2);
+  refracted = ray * n + normal * (n * cosI - cosT);
+  return true;
+}
+
+float RayTracer::computeReflectance(const Vec3f &normal, const Vec3f &ray,
+    float n1, float n2) const
+{
+  float n = n1 / n2;
+  float cosI = - (normal * ray);
+  float sinT2 = n * n * (1.0f - cosI * cosI);
+  if (sinT2 > 1.0f)
+    return 1.0f;
+  float cosT = sqrt(1.0f - sinT2);
+  float rOrth = (n1 * cosI - n2 * cosT) / (n1 * cosI + n2 * cosT);
+  float rPar = (n2 * cosI - n1 * cosT) / (n2 * cosI + n1 * cosT);
+  return (rOrth * rOrth + rPar * rPar) / 2.0f;
 }

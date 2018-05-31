@@ -2,8 +2,13 @@
 
 #include "sphere.h"
 
-Sphere::Sphere(const Vec3f &center, float radius, const Color &color, const float &reflect) :
-  m_center(center), m_radius(radius), m_color(color), m_reflect(reflect)
+Sphere::Sphere(const Vec3f &center, float radius, const Color &color,
+    const float &refract, const bool transparent) :
+  m_center(center),
+  m_radius(radius),
+  m_color(color),
+  m_refract(refract),
+  m_transparent(transparent)
 {}
 
 Sphere::~Sphere()
@@ -31,6 +36,10 @@ void Sphere::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
   mp.normal = collide - m_center;
   mp.normal.normalize();
   mp.color = m_color;
-  mp.reflect = m_reflect;
+  mp.refract = m_refract;
 }
 
+bool Sphere::transparent() const
+{
+  return m_transparent;
+}

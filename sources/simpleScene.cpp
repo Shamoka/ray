@@ -102,7 +102,8 @@ bool SimpleScene::testCollision(const Ray &ray, float dist)
       it != m_primitives.end(); ++it)
   {
     float t_dist;
-    if ((*it)->intersect(ray, t_dist) && t_dist > 0.01f && t_dist < dist)
+    if (!(*it)->transparent() && (*it)->intersect(ray, t_dist) 
+        && t_dist > 0.01f && t_dist < dist)
       return true;
   }
   return false;

@@ -4,13 +4,14 @@
 #include "cylindre.h"
 
 Cylindre::Cylindre(const Vec3f &center, const Vec3f &direction, const float &height,
-    const float &radius, const Color &color, const float &reflect) :
+    const float &radius, const Color &color, const float &refract, const bool transparent) :
   m_center(center),
   m_direction(direction),
   m_height(height),
   m_radius(radius),
   m_color(color),
-  m_reflect(reflect)
+  m_refract(refract),
+  m_transparent(transparent)
 {}
 
 Cylindre::~Cylindre()
@@ -57,5 +58,10 @@ void Cylindre::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
   mp.normal = m_center * (((m_center - m) * m_direction) / m_direction.norm());
   mp.normal.normalize();
   mp.color = m_color;
-  mp.reflect = m_reflect;
+  mp.refract = m_refract;
+}
+
+bool Cylindre::transparent() const
+{
+  return m_transparent;
 }

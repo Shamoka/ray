@@ -19,9 +19,14 @@ class RayTracer
     SimpleScene         *m_scene;
     unsigned int        m_levels;
 
-    void generateRay(unsigned long x, unsigned long y, Ray &ray) const;
-    void computeColor(const Ray &ray, Color &color, unsigned int level) const;
-    void updateParameters();
+    void        generateRay(unsigned long x, unsigned long y, Ray &ray) const;
+    void        computeColor(const Ray &ray, Color &color, unsigned int level, float refract) const;
+    void        updateParameters();
+    bool        getRefracted(Vec3f &refracted, const Vec3f &normal, 
+                             const Vec3f &ray, float n1, float n2) const;
+    Vec3f       getReflected(const Vec3f &normal, const Vec3f &ray) const;
+    float       computeReflectance(const Vec3f &normal, const Vec3f &ray,
+                                   float n1, float n2) const;
 
   public:
     RayTracer(unsigned long pixelWidth, unsigned long pixelHeight,

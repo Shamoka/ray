@@ -11,15 +11,18 @@ class Sphere : public virtual Primitive
     Vec3f       m_center;
     float       m_radius;
     Color       m_color;
-    float       m_reflect;
+    float       m_refract;
+    bool        m_transparent;
 
   public:
-    Sphere(const Vec3f &center, float radius, const Color &color, const float &reflect);
+    Sphere(const Vec3f &center, float radius, const Color &color,
+        const float &reflect, const bool transparent);
     ~Sphere();
 
 
     bool intersect(const Ray &ray, float &dist);
     void computeColorNormal(const Ray &ray, float dist, MaterialPoint &caracteristics);
+    bool transparent() const;
 };
 
 #endif
