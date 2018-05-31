@@ -71,12 +71,13 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level, f
       Vec3f refracted_dir;
       getRefracted(refracted_dir, mp.normal, ray.direction(), refract, mp.refract);
       Ray refracted(ray.origin() + ray.direction() * dist, refracted_dir);
+      float reflectance = computeReflectance(mp.normal, refracted.direction(), refract, mp.refract);
       Color color_sec(0, 0, 0);
       if (refract == mp.refract)
         computeColor(refracted, color_sec, level + 1, 1.0f);
       else
         computeColor(refracted, color_sec, level + 1, mp.refract);
-      color = color_sec;
+      color = color_sec * (1.f - reflectance);
     }
     else
     {
@@ -118,7 +119,7 @@ float RayTracer::computeReflectance(const Vec3f &normal, const Vec3f &ray,
     float n1, float n2) const
 {
   float n = n1 / n2;
-  float cosI = - (normal * ray);
+  float cosI = fabs(normal * ray);
   float sinT2 = n * n * (1.0f - cosI * cosI);
   if (sinT2 > 1.0f)
     return 1.0f;
