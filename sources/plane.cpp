@@ -1,11 +1,12 @@
 #include "plane.h"
 
-Plane::Plane(const Vec3f &normal, const Vec3f &point, 
-    const Color &color, const float &reflect, const bool transparent) :
+Plane::Plane(const Vec3f &normal, const Vec3f &point, const Color &color,
+    const float &reflect, const float &refract, const bool transparent) :
   m_normal(normal),
   m_point(point),
   m_color(color),
-  m_refract(reflect),
+  m_reflect(reflect),
+  m_refract(refract),
   m_transparent(transparent)
 {}
 
@@ -33,6 +34,7 @@ void Plane::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
   mp.normal = m_normal;
   mp.color = m_color;
   mp.refract = m_refract;
+  mp.reflect = m_reflect;
 }
 
 bool Plane::transparent() const

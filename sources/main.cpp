@@ -24,16 +24,16 @@ int main(int ac, char **av)
   RayTracer rayTracer(800, 600, 8., 6., 20., 10);
   SimpleScene scene = SimpleScene();
 
-  Plane  *p = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 1, false);
+  Plane  *p = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 0.5, 1, false);
   scene.addPrimitive(p);
 
-  for (int i = -1; i < 2; i++)
+  for (int i = -1; i < 2; i += 2)
   {
-    for (int j = -1; j < 2; j++)
+    for (int j = -1; j < 2; j += 2)
     {
-      for (int k = 0; k < 3; k++)
+      for (int k = 0; k < 3; k += 2)
       {
-        Sphere *s = new Sphere(Vec3f(i * 2, j * 2, 25 + k * 5), 0.5, Color(rand() % 256, rand() % 256, rand() % 256), 1.0f, false);
+        Sphere *s = new Sphere(Vec3f(i * 2, j * 2, 25 + k * 5), 0.5, Color(rand() % 256, rand() % 256, rand() % 256), 0.5f, 1.0f, false);
         scene.addPrimitive(s);
       }
     }

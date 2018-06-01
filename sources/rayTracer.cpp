@@ -89,7 +89,7 @@ void RayTracer::computeColor(const Ray &ray, Color &color, unsigned int level, f
           getReflected(mp.normal, ray.direction()));
       Color color_sec(0, 0, 0);
       computeColor(reflected, color_sec, level + 1, refract);
-      color += color_sec;
+      color += color_sec * mp.reflect;
     }
   }
 }

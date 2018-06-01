@@ -10,6 +10,7 @@ typedef struct  s_materialPoint
   Vec3f         normal;
   Color         color;
   float         refract;
+  float         reflect;
 }               MaterialPoint;
 
 class Primitive

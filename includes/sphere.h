@@ -11,12 +11,13 @@ class Sphere : public virtual Primitive
     Vec3f       m_center;
     float       m_radius;
     Color       m_color;
+    float       m_reflect;
     float       m_refract;
     bool        m_transparent;
 
   public:
     Sphere(const Vec3f &center, float radius, const Color &color,
-        const float &reflect, const bool transparent);
+        const float &reflect, const float &refract, const bool transparent);
     ~Sphere();
 
 
