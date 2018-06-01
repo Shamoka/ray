@@ -33,17 +33,12 @@ int main(int ac, char **av)
     {
       for (int k = 0; k < 3; k += 2)
       {
-<<<<<<< HEAD
         Sphere *s = new Sphere(Vec3f(i * 4, j * 4, 35 + k * 5), 1, Color(170, 65, 57), 0.5f, 1.0f, false);
-=======
-        Sphere *s = new Sphere(Vec3f(i * 4, j * 4, 35 + k * 5), 1, Color(255, 0, 0), 0.5f, 1.0f, false);
->>>>>>> 68c1c8e47461330ad26fd75f78415da77e66a50c
         scene.addPrimitive(s);
       }
     }
   }
 
-<<<<<<< HEAD
   Cylindre *c1 = new Cylindre(Vec3f(0, -4, 35), Vec3f(1, 0, 0), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
   Cylindre *c2 = new Cylindre(Vec3f(0, 4, 35), Vec3f(1, 0, 0), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
   Cylindre *c3 = new Cylindre(Vec3f(0, -4, 45), Vec3f(1, 0, 0), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
@@ -56,20 +51,6 @@ int main(int ac, char **av)
   Cylindre *c10 = new Cylindre(Vec3f(-4, -4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
   Cylindre *c11 = new Cylindre(Vec3f(-4, 4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
   Cylindre *c12 = new Cylindre(Vec3f(4, -4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(1, 46, 52), 0.5, 1.2, false);
-=======
-  Cylindre *c1 = new Cylindre(Vec3f(0, -4, 35), Vec3f(1, 0, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c2 = new Cylindre(Vec3f(0, 4, 35), Vec3f(1, 0, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c3 = new Cylindre(Vec3f(0, -4, 45), Vec3f(1, 0, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c4 = new Cylindre(Vec3f(0, 4, 45), Vec3f(1, 0, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c5 = new Cylindre(Vec3f(4, 0, 45), Vec3f(0, 1, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c6 = new Cylindre(Vec3f(-4, 0, 45), Vec3f(0, 1, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c7 = new Cylindre(Vec3f(4, 0, 35), Vec3f(0, 1, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c8 = new Cylindre(Vec3f(-4, 0, 35), Vec3f(0, 1, 0), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c9 = new Cylindre(Vec3f(4, 4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c10 = new Cylindre(Vec3f(-4, -4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c11 = new Cylindre(Vec3f(-4, 4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
-  Cylindre *c12 = new Cylindre(Vec3f(4, -4, 40), Vec3f(0, 0, 1), 8, 0.5, Color(255, 0, 0), 0.5, 1.2, false);
->>>>>>> 68c1c8e47461330ad26fd75f78415da77e66a50c
   scene.addPrimitive(c1);
   scene.addPrimitive(c2);
   scene.addPrimitive(c3);
@@ -83,11 +64,7 @@ int main(int ac, char **av)
   scene.addPrimitive(c11);
   scene.addPrimitive(c12);
 
-<<<<<<< HEAD
   Sphere *s = new Sphere(Vec3f(0, 0,  40), 2, Color(50, 79, 0), 0.5f, 1.0f, false);
-=======
-  Sphere *s = new Sphere(Vec3f(0, 0,  40), 2, Color(0, 255, 0), 0.5f, 1.0f, false);
->>>>>>> 68c1c8e47461330ad26fd75f78415da77e66a50c
   scene.addPrimitive(s);
 
   Light *l2 = new Light(Vec3f(0, 0, 20), Color(255, 255, 255));
