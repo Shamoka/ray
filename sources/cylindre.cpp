@@ -57,7 +57,8 @@ bool Cylindre::intersect(const Ray &ray, float &dist)
 void Cylindre::computeColorNormal(const Ray &ray, float dist, MaterialPoint &mp)
 {
   Vec3f m = ray.origin() + ray.direction() * dist;
-  mp.normal = m_center * (((m_center - m) * m_direction) / m_direction.norm());
+  Vec3f n = m_direction * (((m - m_center) * m_direction) / m_direction.norm2());
+  mp.normal = (m_center + n) - m;
   mp.normal.normalize();
   mp.color = m_color;
   mp.refract = m_refract;
