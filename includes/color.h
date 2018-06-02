@@ -19,6 +19,10 @@ class           Color
     float g() const;
     float b() const;
 
+    void setR(float r);
+    void setG(float r);
+    void setB(float r);
+
     Color operator*(const float &f) const;
     Color operator*(const Color &c) const;
     Color operator+=(const Color &c);

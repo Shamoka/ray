@@ -24,7 +24,7 @@ void RayTracer::generateRay(unsigned long x, unsigned long y, Ray &ray) const
 
 void RayTracer::draw(Color *screen) const
 {
-  Ray ray(m_origin, m_direction);
+  Ray   ray(m_origin, m_direction);
 
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
   {
@@ -36,6 +36,30 @@ void RayTracer::draw(Color *screen) const
       screen[j * m_pixelWidth + i] = color;
     }
   }
+  /*
+  for (unsigned long j = 0; j < m_pixelHeight; ++j)
+  {
+    for (unsigned long i = 0; i < m_pixelWidth; ++i)
+    {
+      Color c_up = screen_tmp[j * m_pixelWidth + i];
+      Color c_down = screen_tmp[j * m_pixelWidth + i];
+      Color c_left = screen_tmp[j * m_pixelWidth + i];
+      Color c_right = screen_tmp[j * m_pixelWidth + i];
+
+      if (i > 0)
+        c_left = screen_tmp[j * m_pixelWidth + i - 1];
+      if (i < m_pixelHeight - 1)
+        c_right = screen_tmp[j * m_pixelWidth + i + 1];
+      if (j > 0)
+        c_up = screen_tmp[(j - 1) * m_pixelWidth + i];
+      if (j < m_pixelWidth - 1)
+        c_up = screen_tmp[(j + 1) * m_pixelWidth + i];
+      screen[j * m_pixelWidth + i].setR((c_left.r() + c_right.r() + c_up.r() + c_down.r()) / 4);
+      screen[j * m_pixelWidth + i].setG((c_left.g() + c_right.g() + c_up.g() + c_down.g()) / 4);
+      screen[j * m_pixelWidth + i].setB((c_left.b() + c_right.b() + c_up.b() + c_down.b()) / 4);
+    }
+  }
+  */
 }
 
 void RayTracer::setScene(SimpleScene *scene) { m_scene = scene; }

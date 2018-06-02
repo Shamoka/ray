@@ -19,6 +19,21 @@ float Color::g() const { return this->m_g; }
 
 float Color::b() const { return this->m_b; }
 
+void Color::setR(float r)
+{
+  m_r = r;
+}
+
+void Color::setG(float g)
+{
+  m_g = g;
+}
+
+void Color::setB(float b)
+{
+  m_b = b;
+}
+
 Color Color::operator*(const float &f) const
 {
   return Color(fmin(m_r * f, 255), fmin(m_g * f, 255), fmin(m_b * f, 255));
