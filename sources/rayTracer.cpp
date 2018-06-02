@@ -25,7 +25,9 @@ void RayTracer::generateRay(unsigned long x, unsigned long y, Ray &ray) const
 void RayTracer::draw(Color *screen) const
 {
   Ray   ray(m_origin, m_direction);
+  Color *screen_tmp;
 
+  screen_tmp = new Color[m_pixelWidth * m_pixelHeight];
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
   {
     for (unsigned long i = 0; i < m_pixelWidth; ++i)
@@ -33,10 +35,10 @@ void RayTracer::draw(Color *screen) const
       generateRay(i, j, ray);
       Color color(0, 0, 0);
       computeColor(ray, color, 0, 1.0f);
-      screen[j * m_pixelWidth + i] = color;
+      screen_tmp[j * m_pixelWidth + i] = color;
     }
   }
-  /*
+  *
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
   {
     for (unsigned long i = 0; i < m_pixelWidth; ++i)
@@ -59,7 +61,6 @@ void RayTracer::draw(Color *screen) const
       screen[j * m_pixelWidth + i].setB((c_left.b() + c_right.b() + c_up.b() + c_down.b()) / 4);
     }
   }
-  */
 }
 
 void RayTracer::setScene(SimpleScene *scene) { m_scene = scene; }
