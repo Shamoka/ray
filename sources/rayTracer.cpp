@@ -38,7 +38,6 @@ void RayTracer::draw(Color *screen) const
       screen_tmp[j * m_pixelWidth + i] = color;
     }
   }
-  *
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
   {
     for (unsigned long i = 0; i < m_pixelWidth; ++i)
