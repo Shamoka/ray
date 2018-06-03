@@ -18,6 +18,7 @@ class RayTracer
     float               m_precompHeight;
     SimpleScene         *m_scene;
     unsigned int        m_levels;
+    bool                m_antialiasing;
 
     void        generateRay(unsigned long x, unsigned long y, Ray &ray) const;
     void        computeColor(const Ray &ray, Color &color, unsigned int level, float refract) const;
@@ -27,10 +28,11 @@ class RayTracer
     Vec3f       getReflected(const Vec3f &normal, const Vec3f &ray) const;
     float       computeReflectance(const Vec3f &normal, const Vec3f &ray,
                                    float n1, float n2) const;
+    void        antialiasing(Color *screen) const;
 
   public:
     RayTracer(unsigned long pixelWidth, unsigned long pixelHeight,
-        float width, float height, float depth, unsigned int levels);
+        float width, float height, float depth, unsigned int levels, bool antialiasing);
     ~RayTracer();
     void draw(Color *screen) const;
     void setViewer(float width, float height, const Vec3f &origin, const Vec3f &direction);

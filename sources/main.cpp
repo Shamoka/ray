@@ -21,7 +21,7 @@ int main(int ac, char **av)
 
   srand(time(NULL));
 
-  RayTracer rayTracer(800, 600, 8., 6., 20., 10);
+  RayTracer rayTracer(800, 600, 8., 6., 20., 10, true);
   SimpleScene scene = SimpleScene();
 
   Plane  *p = new Plane(Vec3f(0, 1, 0), Vec3f(0, 5, 0), Color(255, 255, 255), 0.5, 1, false);

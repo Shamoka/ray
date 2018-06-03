@@ -4,9 +4,16 @@
 #include "rayTracer.h"
 
 RayTracer::RayTracer(unsigned long pixelWidth, unsigned long pixelHeight,
-    float width, float height, float depth, unsigned int levels) :
-  m_origin(0.f), m_direction(0.f, 0.f, 1), m_pixelWidth(pixelWidth), m_pixelHeight(pixelHeight),
-  m_width(width), m_height(height), m_depth(depth), m_levels(levels)
+    float width, float height, float depth, unsigned int levels, bool antialiasing) :
+  m_origin(0.f),
+  m_direction(0.f, 0.f, 1),
+  m_pixelWidth(pixelWidth),
+  m_pixelHeight(pixelHeight),
+  m_width(width),
+  m_height(height),
+  m_depth(depth),
+  m_levels(levels),
+  m_antialiasing(antialiasing)
 {
   updateParameters();
 }
@@ -25,9 +32,7 @@ void RayTracer::generateRay(unsigned long x, unsigned long y, Ray &ray) const
 void RayTracer::draw(Color *screen) const
 {
   Ray   ray(m_origin, m_direction);
-  Color *screen_tmp;
 
-  screen_tmp = new Color[m_pixelWidth * m_pixelHeight];
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
   {
     for (unsigned long i = 0; i < m_pixelWidth; ++i)
@@ -35,31 +40,42 @@ void RayTracer::draw(Color *screen) const
       generateRay(i, j, ray);
       Color color(0, 0, 0);
       computeColor(ray, color, 0, 1.0f);
-      screen_tmp[j * m_pixelWidth + i] = color;
+      screen[j * m_pixelWidth + i] = color;
+    }
+  }
+  antialiasing(screen);
+}
+
+void RayTracer::antialiasing(Color *screen) const
+{
+  Color         *screen_tmp;
+
+  screen_tmp = new Color[m_pixelWidth * m_pixelHeight];
+  for (unsigned long j = 0; j < m_pixelHeight; j++)
+  {
+    for (unsigned long i = 0; i < m_pixelWidth; i++)
+    {
+      Color c_up = screen[j * m_pixelWidth + i];
+      Color c_down = screen[j * m_pixelWidth + i];
+      Color c_left = screen[j * m_pixelWidth + i];
+      Color c_right = screen[j * m_pixelWidth + i];
+
+      if (i > 0)
+        c_left = screen[j * m_pixelWidth + i - 1];
+      if (i < m_pixelHeight - 1)
+        c_right = screen[j * m_pixelWidth + i + 1];
+      if (j > 0)
+        c_up = screen[(j - 1) * m_pixelWidth + i];
+      if (j < m_pixelWidth - 1)
+        c_up = screen[(j + 1) * m_pixelWidth + i];
+      screen_tmp[j * m_pixelWidth + i].setR((c_left.r() + c_right.r() + c_up.r() + c_down.r()) / 4);
+      screen_tmp[j * m_pixelWidth + i].setG((c_left.g() + c_right.g() + c_up.g() + c_down.g()) / 4);
+      screen_tmp[j * m_pixelWidth + i].setB((c_left.b() + c_right.b() + c_up.b() + c_down.b()) / 4);
     }
   }
   for (unsigned long j = 0; j < m_pixelHeight; ++j)
-  {
     for (unsigned long i = 0; i < m_pixelWidth; ++i)
-    {
-      Color c_up = screen_tmp[j * m_pixelWidth + i];
-      Color c_down = screen_tmp[j * m_pixelWidth + i];
-      Color c_left = screen_tmp[j * m_pixelWidth + i];
-      Color c_right = screen_tmp[j * m_pixelWidth + i];
-
-      if (i > 0)
-        c_left = screen_tmp[j * m_pixelWidth + i - 1];
-      if (i < m_pixelHeight - 1)
-        c_right = screen_tmp[j * m_pixelWidth + i + 1];
-      if (j > 0)
-        c_up = screen_tmp[(j - 1) * m_pixelWidth + i];
-      if (j < m_pixelWidth - 1)
-        c_up = screen_tmp[(j + 1) * m_pixelWidth + i];
-      screen[j * m_pixelWidth + i].setR((c_left.r() + c_right.r() + c_up.r() + c_down.r()) / 4);
-      screen[j * m_pixelWidth + i].setG((c_left.g() + c_right.g() + c_up.g() + c_down.g()) / 4);
-      screen[j * m_pixelWidth + i].setB((c_left.b() + c_right.b() + c_up.b() + c_down.b()) / 4);
-    }
-  }
+      screen[i + j * m_pixelWidth] = screen_tmp[i + j * m_pixelWidth];
 }
 
 void RayTracer::setScene(SimpleScene *scene) { m_scene = scene; }
