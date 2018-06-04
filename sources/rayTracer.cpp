@@ -33,9 +33,9 @@ void RayTracer::draw(Color *screen) const
 {
   Ray   ray(m_origin, m_direction);
 
-  for (unsigned long j = 0; j < m_pixelHeight; ++j)
+  for (unsigned long j = 0; j < m_pixelHeight; j++)
   {
-    for (unsigned long i = 0; i < m_pixelWidth; ++i)
+    for (unsigned long i = 0; i < m_pixelWidth; i++)
     {
       generateRay(i, j, ray);
       Color color(0, 0, 0);
@@ -62,11 +62,11 @@ void RayTracer::antialiasing(Color *screen) const
 
       if (i > 0)
         c_left = screen[j * m_pixelWidth + i - 1];
-      if (i < m_pixelHeight - 1)
+      if (i < m_pixelWidth - 1)
         c_right = screen[j * m_pixelWidth + i + 1];
       if (j > 0)
         c_up = screen[(j - 1) * m_pixelWidth + i];
-      if (j < m_pixelWidth - 1)
+      if (j < m_pixelHeight - 1)
         c_up = screen[(j + 1) * m_pixelWidth + i];
       screen_tmp[j * m_pixelWidth + i].setR((c_left.r() + c_right.r() + c_up.r() + c_down.r()) / 4);
       screen_tmp[j * m_pixelWidth + i].setG((c_left.g() + c_right.g() + c_up.g() + c_down.g()) / 4);
